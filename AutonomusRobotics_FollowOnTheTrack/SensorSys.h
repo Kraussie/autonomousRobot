@@ -1,10 +1,13 @@
 #ifndef SensorSys_h //if DriveSysControl library has never been defined before
 #define SensorSys_h
 
-class SensorSys_h {
+#include "Arduino.h"
+
+class SensorSys {
   public:
     //constructor method, i.e. setup for the library
-    SensorSys(const int trigPin, const int echoPin, float duration, float distance, const int readingSampleSize = 10, int readings[readingSampleSize], int readingIndex = 0, int readingTotal = 0, int readingAverage)
+    SensorSys(int trigPin=13, int echoPin=12);
+    float duration, distance;
 
     //library functions
     void updateUltrasonic();
@@ -13,6 +16,6 @@ class SensorSys_h {
     void updateLineFollower();
     void printLineFollower();
   private:
-}
+};
 
 #endif
