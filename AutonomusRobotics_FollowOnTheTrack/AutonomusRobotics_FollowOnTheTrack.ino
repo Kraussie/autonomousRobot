@@ -110,7 +110,7 @@ void rightControl(int right_direction, int right_speed) { //function to simplify
 }
 
 void lineFollow() {
-  if (ignore < 1000 || readingAverage >= 23) { //when leader robot is not seen
+  if (ignore < 1000 || readingAverage > 25) { //when leader robot is not seen
     if (data[0] < 40 && data[14] < 40) { //when line follower sensor only sees black
       rightControl(0,0);
       leftControl(0,0);
@@ -124,7 +124,7 @@ void lineFollow() {
       rightControl(0,25);
       leftControl(0,125);
     }
-  } else if (10 < readingAverage < 23) { //when leader robot is being sensed 
+  } else if (15 < readingAverage <= 25) { //when leader robot is being sensed 
     if (data[0] < 40 && data[14] < 40) { //when line follower sensor only sees black
       rightControl(0,0);
       leftControl(0,0);
@@ -138,7 +138,7 @@ void lineFollow() {
       rightControl(0,map(readingAverage, 10, 23, 0, 25));
       leftControl(0,map(readingAverage, 10, 23, 0, 125));
     }
-  } else if (readingAverage < 10) {
+  } else {
     rightControl(0,0);
     leftControl(0,0); 
   }
@@ -177,6 +177,6 @@ void loop() {
   smoothingUltrasonic();
   lineFollow();
   
-  sensorDataPrint();
+  //sensorDataPrint();
   ignore++;
 }
