@@ -84,7 +84,6 @@ void smoothingUltrasonic() {
     readingIndex = 0;
   }
   readingAverage = readingTotal / readingSampleSize;
-  delay(1);
 }
 
 void leftControl(int left_direction, int left_speed) { //function to simplify controlling of motors; forward = 0, backward = 1
@@ -114,12 +113,15 @@ void lineFollow() {
     if (data[0] < 40 && data[14] < 40) { //when line follower sensor only sees black
       rightControl(0,0);
       leftControl(0,0);
+    } else if (data[10] < 40 || data[12] < 40) {
+      rightControl(0,175);
+      leftControl(0,50);
+    } else if (data[0] < 40 || data[2] < 40 || data[4] < 40 || data[6] < 40 || data[8] < 40) {
+      rightControl(0,175);
+      leftControl(0,25);
     } else if (data[14] < 40) {
       rightControl(0,150);
       leftControl(0,150);
-    } else if (data[0] < 40 || data[2] < 40 || data[4] < 40 || data[6] < 40 || data[8] < 40 || data[10] < 40 || data[12] < 40) {
-      rightControl(0,175);
-      leftControl(0,25);
     } else {
       rightControl(0,25);
       leftControl(0,125);
@@ -128,15 +130,18 @@ void lineFollow() {
     if (data[0] < 40 && data[14] < 40) { //when line follower sensor only sees black
       rightControl(0,0);
       leftControl(0,0);
+    } else if (data[10] < 40 || data[12] < 40) {
+      rightControl(0,map(readingAverage, 15, 25, 0, 175));
+      leftControl(0,map(readingAverage, 15, 25, 0, 50));
+    } else if (data[0] < 40 || data[2] < 40 || data[4] < 40 || data[6] < 40 || data[8] < 40) {
+      rightControl(0,map(readingAverage, 15, 25, 0, 175));
+      leftControl(0,map(readingAverage, 15, 25, 0, 25));
     } else if (data[14] < 40) {
-      rightControl(0,map(readingAverage, 10, 23, 0, 150));
-      leftControl(0,map(readingAverage, 10, 23, 0, 150));
-    } else if (data[0] < 40 || data[2] < 40 || data[4] < 40 || data[6] < 40 || data[8] < 40 || data[10] < 40 || data[12] < 40) {
-      rightControl(0,map(readingAverage, 10, 23, 0, 175)); 
-      leftControl(0,map(readingAverage, 10, 23, 0, 25));
+      rightControl(0,map(readingAverage, 15, 25, 0, 150));
+      leftControl(0,map(readingAverage, 15, 25, 0, 150));
     } else {
-      rightControl(0,map(readingAverage, 10, 23, 0, 25));
-      leftControl(0,map(readingAverage, 10, 23, 0, 125));
+      rightControl(0,map(readingAverage, 15, 25, 0, 25));
+      leftControl(0,map(readingAverage, 15, 25, 0, 125));
     }
   } else {
     rightControl(0,0);
