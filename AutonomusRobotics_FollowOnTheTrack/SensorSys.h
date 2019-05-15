@@ -8,6 +8,11 @@ class SensorSys {
     //constructor method, i.e. setup for the library
     SensorSys(int trigPin=13, int echoPin=12);
     float duration, distance;
+    int readingSampleSize = 10;
+    int readings[readingSampleSize];      // the readings from the analog input 
+    int readingIndex = 0;              // the index of the current reading
+    int readingTotal = 0;                  // the running total
+    int readingAverage = 0;                // the average
 
     //library functions
     void updateUltrasonic();

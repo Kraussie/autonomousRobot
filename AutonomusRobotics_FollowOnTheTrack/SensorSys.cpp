@@ -21,12 +21,6 @@ void SensorSys::updateUltrasonicSensor() {
 }
 
 void SensorSys::smoothingUltrasonicSensor() {
-  const int readingSampleSize = 10;
-  int readings[readingSampleSize];      // the readings from the analog input
-  int readingIndex = 0;              // the index of the current reading
-  int readingTotal = 0;                  // the running total
-  int readingAverage = 0;                // the average
-  
   readingTotal = readingTotal - readings[readingIndex];
   readings[readingIndex] = distance;
   readingTotal = readingTotal + readings[readingIndex];

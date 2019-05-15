@@ -10,7 +10,7 @@ DriveSysControl::DriveSysControl(int enA, int in1, int in2, int enB, int in3, in
   pinMode(in4, OUTPUT);
 }
 
-void DriveSysControl::leftControl() {
+void DriveSysControl::leftControl(int left_direction, int left_speed) {
   if (left_direction == 0) {
     digitalWrite(in1, HIGH);
     digitalWrite(in2, LOW);
@@ -21,7 +21,7 @@ void DriveSysControl::leftControl() {
   analogWrite(enA, left_speed); //speed control, min = 0, max = 255
 }
 
-void DriveSysControl::rightControl() {
+void DriveSysControl::rightControl(int right_direction, int right_speed) {
   if (right_direction == 0) { 
     digitalWrite(in3, HIGH);
     digitalWrite(in4, LOW);
